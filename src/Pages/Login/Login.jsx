@@ -1,11 +1,12 @@
 import { FaGoogle } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Services/FirebaseAuth";
 import { useContext } from "react";
 import toast from "react-hot-toast";
 
 const Login = () => {
     const navigate = useNavigate()
+    const location = useLocation()
     const { user, GoogleLogin, Login } = useContext(AuthContext)
     const HandleLogin = e => {
         e.preventDefault()
@@ -17,7 +18,7 @@ const Login = () => {
             Login(email, password)
                 .then(user => {
                     toast.success("Successfully Logged In")
-                    navigate('/')
+                    navigate(location.state || '/')
                 })
                 .catch(error => {
                     toast.error("Invalid email/password")
@@ -32,7 +33,7 @@ const Login = () => {
             GoogleLogin()
                 .then(user => {
                     toast.success("Logged in with Google")
-                    navigate('/')
+                    navigate(location.state || '/')
                 })
                 .catch(error => {
                     toast.error("try again")

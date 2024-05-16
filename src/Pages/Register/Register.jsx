@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Services/FirebaseAuth";
 import { useContext } from "react";
 import { updateProfile } from "firebase/auth";
@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 
 const Register = () => {
     const navigate = useNavigate()
+    const location = useLocation()
     const { user, Register } = useContext(AuthContext)
 
     const HandleLogin = e => {
@@ -24,7 +25,7 @@ const Register = () => {
                     })
                         .then(() => {
                             toast.success("Register and Logged in")
-                            navigate('/')
+                            navigate(location.state || '/')
                         })
                         .catch(() => toast.error("invalid credentials"))
                 })
