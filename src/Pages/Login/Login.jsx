@@ -1,17 +1,43 @@
 import { FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Services/FirebaseAuth";
+import { useContext } from "react";
+import toast from "react-hot-toast";
 
 const Login = () => {
+    const navigate = useNavigate()
+    const { user, GoogleLogin, Login } = useContext(AuthContext)
     const HandleLogin = e => {
         e.preventDefault()
         const Form = e.target;
         const email = Form.email.value;
         const password = Form.password.value;
 
+        if (!user) {
+            Login(email, password)
+                .then(user => {
+                    toast.success("Successfully Logged In")
+                    navigate('/')
+                })
+                .catch(error => {
+                    toast.error("Invalid email/password")
+                    Form.reset()
+                })
+        }
+
     }
 
-    const GoogleLogin = () =>{
-        
+    const GooglSignIn = () => {
+        if (!user) {
+            GoogleLogin()
+                .then(user => {
+                    toast.success("Logged in with Google")
+                    navigate('/')
+                })
+                .catch(error => {
+                    toast.error("try again")
+                })
+        }
     }
     return (
         <div className="flex justify-center">
@@ -23,7 +49,7 @@ const Login = () => {
                 </form>
                 <p className="text-lg text-white mt-4">New in site? please <Link to={'/register'} className="underline text-blue-700">Register</Link></p>
                 <div className="flex justify-center">
-                    <button className="flex gap-1 items-center btn btn-primary text-white mt-5 text-2xl" onClick={GoogleLogin}><FaGoogle />Login with Google</button>
+                    <button className="flex gap-1 items-center btn btn-primary text-white mt-5 text-2xl" onClick={GooglSignIn}><FaGoogle />Login with Google</button>
                 </div>
             </div>
         </div>
