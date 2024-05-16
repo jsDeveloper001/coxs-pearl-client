@@ -1,7 +1,12 @@
+import Banner from "../../components/Header/Banner";
+import MyMap from "../../components/Map/Map";
+
 const Home = () => {
     return (
         <div>
-            Home
+            <Banner />
+            
+            <MyMap />
         </div>
     );
 };
