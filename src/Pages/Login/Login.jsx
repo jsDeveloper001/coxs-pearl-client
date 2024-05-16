@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Services/FirebaseAuth";
 import { useContext } from "react";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
     const navigate = useNavigate()
@@ -42,6 +43,9 @@ const Login = () => {
     }
     return (
         <div className="flex justify-center">
+            <Helmet>
+                <title>Cox's Pearl | Login</title>
+            </Helmet>
             <div className="bg-blue-400 p-5 sm:p-10 rounded-lg w-full sm:w-1/2">
                 <form onSubmit={HandleLogin}>
                     <input type="email" placeholder="your email" className="p-3 w-full" name="email" required />

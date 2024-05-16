@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { updateProfile } from "firebase/auth";
 import auth from "../../Services/Firebase.config";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
     const navigate = useNavigate()
@@ -35,6 +36,9 @@ const Register = () => {
 
     return (
         <div className="flex justify-center">
+            <Helmet>
+                <title>Cox's Pearl | Register</title>
+            </Helmet>
             <div className="bg-blue-400 p-5 sm:p-10 rounded-lg w-full sm:w-1/2">
                 <form onSubmit={HandleLogin}>
                     <input type="text" placeholder="your full name" className="p-3 w-full" name="name" required />
