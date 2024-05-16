@@ -9,7 +9,6 @@ const Home = () => {
                 <title>Cox's Pearl | Home</title>
             </Helmet>
             <Banner />
-
             <MyMap />
         </div>
     );
